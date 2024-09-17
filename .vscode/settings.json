@@ -2,5 +2,6 @@
 	"editor.renderWhitespace": "boundary",
 	"editor.detectIndentation": false,
 	"editor.insertSpaces": false,
-	"files.autoSave": "onFocusChange"
+	"files.autoSave": "onFocusChange",
+	"godotTools.editorPath.godot4": "c:\\Users\\mrobbins\\Desktop\\Godot_v4.3-stable_win64.exe\\Godot_v4.3-stable_win64.exe"
 }
