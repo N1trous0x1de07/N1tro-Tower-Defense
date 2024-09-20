@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://c74tddw3ql2ly"]
+[gd_scene load_steps=7 format=3 uid="uid://c74tddw3ql2ly"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_el1qx"]
 [ext_resource type="PackedScene" uid="uid://ca22wpjnmqqg5" path="res://Assets/tile_straight.glb" id="2_fp15d"]
+[ext_resource type="PackedScene" uid="uid://dritcaewm1iaf" path="res://Assets/tile_endRoundSpawn.glb" id="2_gv62t"]
 [ext_resource type="PackedScene" uid="uid://bu07pbh3no534" path="res://Assets/tile_cornerRound.glb" id="3_43jar"]
+[ext_resource type="PackedScene" uid="uid://dm7djr4ja38xt" path="res://Assets/tile_endRound.glb" id="3_juy0q"]
+[ext_resource type="PackedScene" uid="uid://ctkibfyvtx28t" path="res://Assets/tile.glb" id="4_wile5"]
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_el1qx")
+tile_start = ExtResource("2_gv62t")
+tile_end = ExtResource("3_juy0q")
 tile_straight = ExtResource("2_fp15d")
 tile_corner = ExtResource("3_43jar")
+tile_empty = ExtResource("4_wile5")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 8, 8.5, 9.6)

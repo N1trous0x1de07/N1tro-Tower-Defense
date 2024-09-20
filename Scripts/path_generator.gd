@@ -24,9 +24,9 @@ func generate_path():
 
 		if choice == 0 or x % 2 == 0 or x == _grid_length-1:
 			x += 1
-		elif choice == 1 and y < _grid_height and not _path.has(Vector2i(x,y+1)):
+		elif choice == 1 and y < _grid_height-2 and not _path.has(Vector2i(x,y+1)):
 			y += 1
-		elif choice == 2 and y > 0 and not _path.has(Vector2i(x,y-1)):
+		elif choice == 2 and y > 1 and not _path.has(Vector2i(x,y-1)):
 			y -= 1
 
 	return _path
@@ -36,9 +36,27 @@ func get_tile_score(tile:Vector2i) -> int:
 	var x = tile.x
 	var y = tile.y
 
-	score += 1 if _path.has(Vector2(x,y-1)) else 0
-	score += 2 if _path.has(Vector2(x+1,y)) else 0
-	score += 4 if _path.has(Vector2(x,y+1)) else 0
-	score += 8 if _path.has(Vector2(x-1,y)) else 0
+	score += 1 if _path.has(Vector2i(x,y-1)) else 0
+	score += 2 if _path.has(Vector2i(x+1,y)) else 0
+	score += 4 if _path.has(Vector2i(x,y+1)) else 0
+	score += 8 if _path.has(Vector2i(x-1,y)) else 0
 
 	return score
+
+func get_path() -> Array[Vector2i]:
+	return _path
+
+func _add_loops():
+	#checks loop availability
+	var loops_generated:bool = true
+
+	#Keep on goin until no loops are available
+	while loops_generated:
+		for i in range(_path.size()):
+			var loop:Array[Vector2i] = _is_loop_option(i)
+			#if loops size > 0, then isloopoption found loop
+			#Add it to the Array!
+			if loop.size() > 0:
+				loops_generated = true 
+				for j in range(loop.size()):
+					_path.insert(i+1+j, loop[j])
