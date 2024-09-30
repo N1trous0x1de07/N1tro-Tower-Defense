@@ -52,6 +52,7 @@ func _add_loops():
 
 	#Keep on goin until no loops are available
 	while loops_generated:
+		loops_generated = false
 		for i in range(_path.size()):
 			var loop:Array[Vector2i] = _is_loop_option(i)
 			#if loops size > 0, then isloopoption found loop
@@ -60,3 +61,58 @@ func _add_loops():
 				loops_generated = true 
 				for j in range(loop.size()):
 					_path.insert(i+1+j, loop[j])
+##For given index in path, evaluate whether loops can be generated around it
+func _is_loop_option(index:int) -> Array[Vector2i]:
+	var x: int = _path[index].x
+	var y: int = _path[index].y
+	var return_path:Array[Vector2i]
+
+	#yellow
+	if (x < _grid_length-1 and y > 1
+		and _tile_loc_free(x, y-3) and _tile_loc_free(x+1, y-3) and _tile_loc_free(x+2, y-3)
+		and _tile_loc_free(x-1, y-2) and _tile_loc_free(x, y-2) and _tile_loc_free(x+1, y-2) and _tile_loc_free(x+2, y-2) and _tile_loc_free(x+3, y-2)
+		and _tile_loc_free(x-1, y-1) and _tile_loc_free(x, y-1) and _tile_loc_free(x+1, y-1) and _tile_loc_free(x+2, y-1) and _tile_loc_free(x+3, y-1)
+		and _tile_loc_free(x+1, y) and _tile_loc_free(x+2, y) and _tile_loc_free(x+3, y)
+		and _tile_loc_free(x+1, y+1) and _tile_loc_free(x+2, y+1)):
+		return_path = [Vector2i(x+1, y), Vector2i(x+2, y), Vector2i(x+2, y-1), Vector2i(x+2, y-2), Vector2i(x+1, y-2), Vector2i(x, y-2), Vector2i(x, y-1)]
+
+		_loop_count += 1
+		return_path.append(Vector2i(x,y))
+	#blue
+	elif (x > 2 and y > 1
+			and _tile_loc_free(x, y-3) and _tile_loc_free(x+1, y-3) and _tile_loc_free(x+2, y-3)
+			and _tile_loc_free(x-1, y-2) and _tile_loc_free(x, y-2) and _tile_loc_free(x+1, y-2) and _tile_loc_free(x+2, y-2) and _tile_loc_free(x+3, y-2)
+			and _tile_loc_free(x-1, y-1) and _tile_loc_free(x, y-1) and _tile_loc_free(x+1, y-1) and _tile_loc_free(x+2, y-1) and _tile_loc_free(x+3, y-1)
+			and _tile_loc_free(x+1, y) and _tile_loc_free(x+2, y) and _tile_loc_free(x+3, y)
+			and _tile_loc_free(x+1, y+1) and _tile_loc_free(x+2, y+1)):
+		return_path = [Vector2i(x+1, y), Vector2i(x+2, y), Vector2i(x+2, y-1), Vector2i(x+2, y-2), Vector2i(x+1, y-2), Vector2i(x, y-2), Vector2i(x, y-1)]
+
+
+		_loop_count += 1
+		return_path.append(Vector2i(x,y))
+
+	#Red
+	elif (x < _grid_length-1 and y < _grid_height-2
+			and _tile_loc_free(x, y-3) and _tile_loc_free(x+1, y-3) and _tile_loc_free(x+2, y-3)
+			and _tile_loc_free(x-1, y-2) and _tile_loc_free(x, y-2) and _tile_loc_free(x+1, y-2) and _tile_loc_free(x+2, y-2) and _tile_loc_free(x+3, y-2)
+			and _tile_loc_free(x-1, y-1) and _tile_loc_free(x, y-1) and _tile_loc_free(x+1, y-1) and _tile_loc_free(x+2, y-1) and _tile_loc_free(x+3, y-1)
+			and _tile_loc_free(x+1, y) and _tile_loc_free(x+2, y) and _tile_loc_free(x+3, y)
+			and _tile_loc_free(x+1, y+1) and _tile_loc_free(x+2, y+1)):
+		return_path = [Vector2i(x+1, y), Vector2i(x+2, y), Vector2i(x+2, y-1), Vector2i(x+2, y-2), Vector2i(x+1, y-2), Vector2i(x, y-2), Vector2i(x, y-1)]
+
+		_loop_count += 1
+		return_path.append(Vector2i(x,y))
+	#Brown
+	elif (x > 2 and y < _grid_height-2
+			and _tile_loc_free(x, y-3) and _tile_loc_free(x+1, y-3) and _tile_loc_free(x+2, y-3)
+			and _tile_loc_free(x-1, y-2) and _tile_loc_free(x, y-2) and _tile_loc_free(x+1, y-2) and _tile_loc_free(x+2, y-2) and _tile_loc_free(x+3, y-2)
+			and _tile_loc_free(x-1, y-1) and _tile_loc_free(x, y-1) and _tile_loc_free(x+1, y-1) and _tile_loc_free(x+2, y-1) and _tile_loc_free(x+3, y-1)
+			and _tile_loc_free(x+1, y) and _tile_loc_free(x+2, y) and _tile_loc_free(x+3, y)
+			and _tile_loc_free(x+1, y+1) and _tile_loc_free(x+2, y+1)):
+		return_path = [Vector2i(x+1, y), Vector2i(x+2, y), Vector2i(x+2, y-1), Vector2i(x+2, y-2), Vector2i(x+1, y-2), Vector2i(x, y-2), Vector2i(x, y-1)]
+
+		_loop_count += 1
+		return_path.append(Vector2i(x,y))
+
+
+####THIS IS HIGHLY UNFINISHED
