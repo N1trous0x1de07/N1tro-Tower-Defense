@@ -4,10 +4,17 @@ extends Node3D
 @export var tile_end:PackedScene
 @export var tile_straight:PackedScene
 @export var tile_corner:PackedScene
+@export var tile_crossroads:PackedScene
+@export var tile_enemy:PackedScene
 @export var tile_empty:PackedScene
 
 @export var map_length:int = 16
 @export var map_height:int = 9 
+
+@export var min_path_size = 50
+@export var max_path_size = 70
+@export var min_loops = 3
+@export var max_loops = 5
 
 var _pg:PathGenerator
 
