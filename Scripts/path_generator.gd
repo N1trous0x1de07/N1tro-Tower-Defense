@@ -147,6 +147,3 @@ func get_loop_count() -> int:
 ##Returns the Vector2i path tile at the given index
 func get_path_tile(index:int) -> Vector2i:
 	return _path[index]
-
-
-####THIS IS HIGHLY UNFINISHED
