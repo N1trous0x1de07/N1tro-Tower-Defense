@@ -21,7 +21,6 @@ tile_corner = ExtResource("3_43jar")
 tile_crossroads = ExtResource("6_8hakc")
 tile_enemy = ExtResource("7_5be3e")
 tile_empty = Array[PackedScene]([ExtResource("7_du1t8"), ExtResource("8_ng56r"), ExtResource("9_mfoey"), ExtResource("4_wile5"), ExtResource("4_wile5"), ExtResource("4_wile5"), ExtResource("4_wile5")])
-map_length = null
 map_height = 10
 min_path_size = 42
 max_path_size = 42

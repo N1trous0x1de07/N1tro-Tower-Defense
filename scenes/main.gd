@@ -83,7 +83,7 @@ func _display_path():
 
 		if tile_score == 2:
 			tile = tile_start.instantiate()
-			tile_rotation = Vector3(0,270,0)
+			tile_rotation = Vector3(0,-90,0)
 		if tile_score == 8:
 			tile = tile_end.instantiate()
 			tile_rotation = Vector3(0,90,0)
@@ -104,6 +104,9 @@ func _display_path():
 			tile_rotation = Vector3(0,270,0)
 		elif tile_score == 9:
 			tile = tile_corner.instantiate()
+			tile_rotation = Vector3(0,0,0)
+		elif tile_score == 15:
+			tile = tile_crossroads.instantiate()
 			tile_rotation = Vector3(0,0,0)
 		
 		add_child(tile)
