@@ -1,0 +1,35 @@
+[gd_scene load_steps=12 format=3 uid="uid://c74tddw3ql2ly"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_el1qx"]
+[ext_resource type="PackedScene" uid="uid://ca22wpjnmqqg5" path="res://Assets/tile_straight.glb" id="2_fp15d"]
+[ext_resource type="PackedScene" uid="uid://dritcaewm1iaf" path="res://Assets/tile_endRoundSpawn.glb" id="2_gv62t"]
+[ext_resource type="PackedScene" uid="uid://bu07pbh3no534" path="res://Assets/tile_cornerRound.glb" id="3_43jar"]
+[ext_resource type="PackedScene" uid="uid://dm7djr4ja38xt" path="res://Assets/tile_endRound.glb" id="3_juy0q"]
+[ext_resource type="PackedScene" uid="uid://ctkibfyvtx28t" path="res://Assets/tile.glb" id="4_wile5"]
+[ext_resource type="PackedScene" uid="uid://b886farkicfdo" path="res://Assets/tile_crossing.glb" id="6_8hakc"]
+[ext_resource type="PackedScene" uid="uid://dgprmcrpa7313" path="res://Assets/enemy_ufoGreen.glb" id="7_5be3e"]
+[ext_resource type="PackedScene" uid="uid://lvmd0ngve28o" path="res://Assets/tile_crystal.glb" id="7_du1t8"]
+[ext_resource type="PackedScene" uid="uid://bdpctatmda3aw" path="res://Assets/tile_rock.glb" id="8_ng56r"]
+[ext_resource type="PackedScene" uid="uid://376u0r3rx7b7" path="res://Assets/tile_tree.glb" id="9_mfoey"]
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_el1qx")
+tile_start = ExtResource("2_gv62t")
+tile_end = ExtResource("3_juy0q")
+tile_straight = ExtResource("2_fp15d")
+tile_corner = ExtResource("3_43jar")
+tile_crossroads = ExtResource("6_8hakc")
+tile_enemy = ExtResource("7_5be3e")
+tile_empty = Array[PackedScene]([ExtResource("7_du1t8"), ExtResource("8_ng56r"), ExtResource("9_mfoey"), ExtResource("4_wile5"), ExtResource("4_wile5"), ExtResource("4_wile5"), ExtResource("4_wile5")])
+map_height = 10
+min_path_size = 42
+max_path_size = 42
+min_loops = 2
+max_loops = 2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 8, 8.5, 9.6)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.625243, 0.78043, 0, 0.78043, 0.625243, -1, 2.73302e-08, -3.41137e-08, 3.77617, 3.13063, 0.0662887)

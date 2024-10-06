@@ -1,4 +1,4 @@
-extends Object
+extends Node
 class_name PathGenerator
 
 var _loop_count:int
@@ -11,8 +11,9 @@ func _init():
 	generate_path(path_config.add_loops)
 
 	while(_path_route.size() < path_config.min_path_size or _path_route.size() > path_config.max_path_size
-	or _loop_count < path_config.min_loops or _loop_count > path_config.max_loops):
-		generate_path(path_config.add_loops)
+		or _loop_count < path_config.min_loops or _loop_count > path_config.max_loops
+	):
+			generate_path(path_config.add_loops)
 
 
 ##Main work function. Generates random path left to right. Loops will be checked and added if add_loops is true.
@@ -81,7 +82,8 @@ func _add_loops():
 			var loop:Array[Vector2i] = _is_loop_option(i)
 			#if the loop size > 0, then _is_loops_option found loop.. so add it to the array
 			if loop.size() > 0:
-				loops_generated = true for j in range(loop.size()):
+				loops_generated = true
+				for j in range(loop.size()):
 					_path_route.insert(i+1+j, loop[j])
 
 ##for given index in path eval whether loops can be generated around it

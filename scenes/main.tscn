@@ -1,35 +1,36 @@
 [gd_scene load_steps=12 format=3 uid="uid://c74tddw3ql2ly"]
 
-[ext_resource type="Script" path="res://scenes/main.gd" id="1_el1qx"]
-[ext_resource type="PackedScene" uid="uid://ca22wpjnmqqg5" path="res://Assets/tile_straight.glb" id="2_fp15d"]
-[ext_resource type="PackedScene" uid="uid://dritcaewm1iaf" path="res://Assets/tile_endRoundSpawn.glb" id="2_gv62t"]
-[ext_resource type="PackedScene" uid="uid://bu07pbh3no534" path="res://Assets/tile_cornerRound.glb" id="3_43jar"]
-[ext_resource type="PackedScene" uid="uid://dm7djr4ja38xt" path="res://Assets/tile_endRound.glb" id="3_juy0q"]
-[ext_resource type="PackedScene" uid="uid://ctkibfyvtx28t" path="res://Assets/tile.glb" id="4_wile5"]
-[ext_resource type="PackedScene" uid="uid://b886farkicfdo" path="res://Assets/tile_crossing.glb" id="6_8hakc"]
-[ext_resource type="PackedScene" uid="uid://dgprmcrpa7313" path="res://Assets/enemy_ufoGreen.glb" id="7_5be3e"]
-[ext_resource type="PackedScene" uid="uid://lvmd0ngve28o" path="res://Assets/tile_crystal.glb" id="7_du1t8"]
-[ext_resource type="PackedScene" uid="uid://bdpctatmda3aw" path="res://Assets/tile_rock.glb" id="8_ng56r"]
-[ext_resource type="PackedScene" uid="uid://376u0r3rx7b7" path="res://Assets/tile_tree.glb" id="9_mfoey"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_1ufd1"]
+[ext_resource type="PackedScene" uid="uid://dritcaewm1iaf" path="res://Assets/tile_endRoundSpawn.glb" id="2_plb2v"]
+[ext_resource type="PackedScene" uid="uid://ca22wpjnmqqg5" path="res://Assets/tile_straight.glb" id="4_wnhtn"]
+[ext_resource type="PackedScene" uid="uid://bu07pbh3no534" path="res://Assets/tile_cornerRound.glb" id="5_5asm2"]
+[ext_resource type="PackedScene" uid="uid://b886farkicfdo" path="res://Assets/tile_crossing.glb" id="6_c12dc"]
+[ext_resource type="PackedScene" uid="uid://dgprmcrpa7313" path="res://Assets/enemy_ufoGreen.glb" id="7_ommc6"]
+[ext_resource type="PackedScene" uid="uid://bdpctatmda3aw" path="res://Assets/tile_rock.glb" id="8_dud3v"]
+[ext_resource type="PackedScene" uid="uid://lvmd0ngve28o" path="res://Assets/tile_crystal.glb" id="8_xrxd7"]
+[ext_resource type="PackedScene" uid="uid://376u0r3rx7b7" path="res://Assets/tile_tree.glb" id="9_mm7um"]
+[ext_resource type="PackedScene" uid="uid://ctkibfyvtx28t" path="res://Assets/tile.glb" id="10_rlda2"]
+
+[sub_resource type="Environment" id="Environment_ejq31"]
 
 [node name="main" type="Node3D"]
-script = ExtResource("1_el1qx")
-tile_start = ExtResource("2_gv62t")
-tile_end = ExtResource("3_juy0q")
-tile_straight = ExtResource("2_fp15d")
-tile_corner = ExtResource("3_43jar")
-tile_crossroads = ExtResource("6_8hakc")
-tile_enemy = ExtResource("7_5be3e")
-tile_empty = Array[PackedScene]([ExtResource("7_du1t8"), ExtResource("8_ng56r"), ExtResource("9_mfoey"), ExtResource("4_wile5"), ExtResource("4_wile5"), ExtResource("4_wile5"), ExtResource("4_wile5")])
-map_height = 10
-min_path_size = 42
-max_path_size = 42
-min_loops = 2
-max_loops = 2
+script = ExtResource("1_1ufd1")
+tile_start = ExtResource("2_plb2v")
+tile_end = ExtResource("2_plb2v")
+tile_straight = ExtResource("4_wnhtn")
+tile_corner = ExtResource("5_5asm2")
+tile_crossroads = ExtResource("6_c12dc")
+tile_enemy = ExtResource("7_ommc6")
+tile_empty = Array[PackedScene]([ExtResource("8_xrxd7"), ExtResource("8_dud3v"), ExtResource("9_mm7um"), ExtResource("10_rlda2"), ExtResource("10_rlda2"), ExtResource("10_rlda2"), ExtResource("10_rlda2")])
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 8, 8.5, 9.6)
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 7.5, 9, 9.5)
 fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-4.37114e-08, -0.625243, 0.78043, 0, 0.78043, 0.625243, -1, 2.73302e-08, -3.41137e-08, 3.77617, 3.13063, 0.0662887)
+transform = Transform3D(-0.194673, -0.96642, 0.167732, 0.385333, 0.0819051, 0.919135, -0.902009, 0.243563, 0.356449, 0, 3.438, 12.087)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ejq31")
