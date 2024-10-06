@@ -1,0 +1,206 @@
+[gd_scene load_steps=12 format=3 uid="uid://dk8exveae8ryp"]
+
+[ext_resource type="Script" path="res://Scripts/basic_enemy.gd" id="1_bh7r7"]
+[ext_resource type="Resource" uid="uid://ciceg80egv6w5" path="res://resources/basic_enemy_settings.res" id="2_stjqt"]
+[ext_resource type="PackedScene" uid="uid://dgprmcrpa7313" path="res://Assets/enemy_ufoGreen.glb" id="2_yofs5"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_mg2aa"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_yk1p2"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_5mtbb"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_rqq1d"]
+
+[sub_resource type="Animation" id="Animation_2o4xe"]
+resource_name = "despawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D/enemy_ufoGreen2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Path3D/PathFollow3D/enemy_ufoGreen2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gi5ld"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D/enemy_ufoGreen2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 0.196),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1), Vector3(1.15, 1.15, 1.15), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Path3D/PathFollow3D/enemy_ufoGreen2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 0.42),
+"update": 0,
+"values": [Vector3(-0.7, 0, 0), Vector3(0, 0.2, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Path3D/PathFollow3D/enemy_ufoGreen2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cvogp"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D/enemy_ufoGreen2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Path3D/PathFollow3D/enemy_ufoGreen2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Path3D/PathFollow3D/enemy_ufoGreen2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fd5hq"]
+_data = {
+"RESET": SubResource("Animation_cvogp"),
+"despawn": SubResource("Animation_2o4xe"),
+"spawn": SubResource("Animation_gi5ld")
+}
+
+[node name="enemy01" type="Node3D"]
+script = ExtResource("1_bh7r7")
+enemy_settings = ExtResource("2_stjqt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fd5hq")
+}
+
+[node name="EnemyStateChart" type="Node" parent="."]
+script = ExtResource("3_mg2aa")
+
+[node name="CompoundState" type="Node" parent="EnemyStateChart"]
+script = ExtResource("4_yk1p2")
+initial_state = NodePath("Spawning")
+
+[node name="Spawning" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("5_rqq1d")
+
+[node name="ToTravelling" type="Node" parent="EnemyStateChart/CompoundState/Spawning"]
+script = ExtResource("5_5mtbb")
+to = NodePath("../../Travelling")
+event = &"to_travelling_state"
+delay_in_seconds = "0.0"
+
+[node name="Travelling" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("5_rqq1d")
+
+[node name="ToDamagingState" type="Node" parent="EnemyStateChart/CompoundState/Travelling"]
+script = ExtResource("5_5mtbb")
+to = NodePath("../../Damaging")
+event = &"to_damaging_state"
+delay_in_seconds = "0.0"
+
+[node name="ToDyingState" type="Node" parent="EnemyStateChart/CompoundState/Travelling"]
+script = ExtResource("5_5mtbb")
+to = NodePath("../../Dying")
+event = &"to_dying_state"
+delay_in_seconds = "0.0"
+
+[node name="Damaging" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("5_rqq1d")
+
+[node name="ToDespawningState" type="Node" parent="EnemyStateChart/CompoundState/Damaging"]
+script = ExtResource("5_5mtbb")
+to = NodePath("../../Despawning")
+event = &"to_despawning_state"
+delay_in_seconds = "0.0"
+
+[node name="Dying" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("5_rqq1d")
+
+[node name="ToRemoveEnemyState" type="Node" parent="EnemyStateChart/CompoundState/Dying"]
+script = ExtResource("5_5mtbb")
+to = NodePath("../../RemoveEnemy")
+event = &"to_remove_enemy_state"
+delay_in_seconds = "0.0"
+
+[node name="Despawning" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("5_rqq1d")
+
+[node name="ToRemoveEnemyState" type="Node" parent="EnemyStateChart/CompoundState/Despawning"]
+script = ExtResource("5_5mtbb")
+to = NodePath("../../RemoveEnemy")
+event = &"to_remove_enemy_state"
+delay_in_seconds = "0.0"
+
+[node name="RemoveEnemy" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("5_rqq1d")
+
+[node name="Path3D" type="Path3D" parent="."]
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+loop = false
+
+[node name="enemy_ufoGreen2" parent="Path3D/PathFollow3D" instance=ExtResource("2_yofs5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[connection signal="state_entered" from="EnemyStateChart/CompoundState/Spawning" to="." method="_on_spawning_state_entered"]
+[connection signal="state_entered" from="EnemyStateChart/CompoundState/Travelling" to="." method="_on_travelling_state_entered"]
+[connection signal="state_processing" from="EnemyStateChart/CompoundState/Travelling" to="." method="_on_travelling_state_processing"]
+[connection signal="state_entered" from="EnemyStateChart/CompoundState/Damaging" to="." method="_on_damaging_state_entered"]
+[connection signal="state_entered" from="EnemyStateChart/CompoundState/Dying" to="." method="_on_dying_state_entered"]
+[connection signal="state_entered" from="EnemyStateChart/CompoundState/Despawning" to="." method="_on_despawning_state_entered"]
+[connection signal="state_entered" from="EnemyStateChart/CompoundState/RemoveEnemy" to="." method="_on_remove_enemy_state_entered"]
