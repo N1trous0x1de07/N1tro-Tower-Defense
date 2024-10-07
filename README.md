@@ -20,6 +20,6 @@ In this game there is a money system where you will need at least 60 dollars to 
 #6 The artistic touches:
 In this game there are health bars, interactable UI buttons, there's a lighting system with shadows and post processing, along with sounds and effects when enemies die. The post processing has been tweaked very slightly so that the game looks a bit more vibrant. The lighting creates shadows on all the objects in the game, but it isnt too much. The UI buttons work perfectly and are even coded to gray out when you can't use them. The health bars even change colors based on the enemy's health value.
 
-#7 The wave system
+#7 The wave system:
 Waves do not automatically start in this game. There is a button in the top left of the screen that you have to click in order to start each wave. This gives players a moment to think and strategize before anything even happens. In my opinion this is a must have for tower defense games and it makes things quite a bit more fun. There are already 4 waves in the game, but more can be added in a couple button presses.
  
