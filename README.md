@@ -1,6 +1,7 @@
 # TowerDefenseTemplate
 
 In this project there were a lot of different little things added all at different times.
+
 #1 the path generation:
 The path generation in this game is completely random going from left to right using the tiles it is given. It's a very interesting thing to implement into a tower defense game and I think it fits in really nicely. There's also the ability for the generation to include loops which makes it even better because the pathway gets much longer. I think if I had the chance to do it again I probably wouldn't though because it took quite a long time to actually implement.
 
