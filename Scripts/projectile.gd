@@ -4,8 +4,8 @@ class_name Projectile
 var starting_position:Vector3
 var target:Node3D
 
-@export var speed:float = 2 # meters per second
-@export var damage:int = 20
+@export var speed:float = 2 # metres per second
+@export var damage:int = 15
 var lerp_pos:float = 0
 
 # Called when the node enters the scene tree for the first time.
