@@ -20,6 +20,7 @@ var _drag_alpha:float = 0.5
 func _ready():
 	icon = button_icon
 	action_object = button_object.instantiate()
+	action_object.set_patrolling(false)
 	add_child(action_object)
 	action_object.visible = false
 	cam = get_viewport().get_camera_3d()
