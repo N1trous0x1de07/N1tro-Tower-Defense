@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=5 format=3 uid="uid://bxperh7wc8r4v"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_settings.gd" id="1_eqjko"]
+[ext_resource type="Resource" uid="uid://l82nmqiwe675" path="res://resources/speed_enemy_settings.res" id="2_yqbpm"]
+[ext_resource type="Resource" uid="uid://cmnurvra8bet" path="res://resources/power_enemy_settings.res" id="3_8j7vt"]
+[ext_resource type="Script" path="res://Scripts/wave.gd" id="3_fux77"]
+
+[resource]
+script = ExtResource("3_fux77")
+enemies = Array[ExtResource("1_eqjko")]([ExtResource("2_yqbpm"), ExtResource("3_8j7vt"), ExtResource("2_yqbpm"), ExtResource("2_yqbpm"), ExtResource("3_8j7vt"), ExtResource("2_yqbpm")])
