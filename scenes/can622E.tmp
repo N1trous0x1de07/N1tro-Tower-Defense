@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm3ktevtn4kqm"]
+
+[ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_41pi6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ky184"]
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7idc"]
+albedo_color = Color(0.172549, 0.172549, 0.172549, 1)
+
+[node name="Cannonball" type="Area3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_41pi6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ky184")
+
+[node name="Mesh" type="CSGSphere3D" parent="."]
+material_override = SubResource("StandardMaterial3D_v7idc")
+radius = 0.1
+radial_segments = 8

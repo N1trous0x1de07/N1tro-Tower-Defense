@@ -2,6 +2,8 @@ extends Node3D
 
 @export var enemy_settings:EnemySettings
 
+var enemy_health:int
+
 var attackable:bool = false
 var distance_travelled:float = 0
 
@@ -10,12 +12,12 @@ var path_follow_3d:PathFollow3D
 
 func _ready():
 #	print("Ready")
+	enemy_health = enemy_settings.health
 	$Path3D.curve = path_route_to_curve_3d()
 	$Path3D/PathFollow3D.progress = 0
 	
-
 func _on_spawning_state_entered():
-#	print("Spawning")
+	#print("Spawning")
 	attackable = false
 	$AnimationPlayer.play("spawn")
 	await $AnimationPlayer.animation_finished
@@ -40,7 +42,6 @@ func _on_despawning_state_entered():
 	$EnemyStateChart.send_event("to_remove_enemy_state")
 
 func _on_remove_enemy_state_entered():
-#	print("queue_free()")
 	queue_free()
 
 func _on_damaging_state_entered():
@@ -59,3 +60,11 @@ func path_route_to_curve_3d() -> Curve3D:
 		c3d.add_point(Vector3(element.x, 0.25, element.y))
 
 	return c3d
+
+
+func _on_area_3d_area_entered(area):
+	if area is Projectile:
+		enemy_health -= area.damage
+
+	if enemy_health <= 0:
+		queue_free()
