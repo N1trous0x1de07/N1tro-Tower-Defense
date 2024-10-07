@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dk8exveae8ryp"]
+[gd_scene load_steps=13 format=3 uid="uid://dk8exveae8ryp"]
 
 [ext_resource type="Script" path="res://Scripts/basic_enemy.gd" id="1_bh7r7"]
 [ext_resource type="Resource" uid="uid://ciceg80egv6w5" path="res://resources/basic_enemy_settings.res" id="2_stjqt"]
@@ -119,6 +119,9 @@ _data = {
 "spawn": SubResource("Animation_gi5ld")
 }
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jvodr"]
+height = 0.75
+
 [node name="enemy01" type="Node3D"]
 script = ExtResource("1_bh7r7")
 enemy_settings = ExtResource("2_stjqt")
@@ -196,6 +199,14 @@ loop = false
 
 [node name="enemy_ufoGreen2" parent="Path3D/PathFollow3D" instance=ExtResource("2_yofs5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="Area3D" type="Area3D" parent="Path3D/PathFollow3D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_jvodr")
 
 [connection signal="state_entered" from="EnemyStateChart/CompoundState/Spawning" to="." method="_on_spawning_state_entered"]
 [connection signal="state_entered" from="EnemyStateChart/CompoundState/Travelling" to="." method="_on_travelling_state_entered"]
