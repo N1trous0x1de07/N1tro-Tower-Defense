@@ -20,7 +20,6 @@ var _drag_alpha:float = 0.5
 func _ready():
 	icon = button_icon
 	action_object = button_object.instantiate()
-	action_object.set_patrolling(false)
 	add_child(action_object)
 	action_object.visible = false
 	cam = get_viewport().get_camera_3d()
@@ -31,7 +30,7 @@ func _physics_process(_delta):
 		var mouse_pos:Vector2 = get_viewport().get_mouse_position()
 		var origin:Vector3 = cam.project_ray_origin(mouse_pos)
 		var end:Vector3 = origin + cam.project_ray_normal(mouse_pos) * RAYCAST_LENGTH
-		var query = PhysicsRayQueryParameters3D.create(origin, end)
+		var query = PhysicsRayQueryParameters3D.create(origin, end, 57)
 		query.collide_with_areas = true
 		var rayResult:Dictionary = space_state.intersect_ray(query)
 		if rayResult.size() > 0:
