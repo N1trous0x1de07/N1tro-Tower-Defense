@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c74tddw3ql2ly"]
+[gd_scene load_steps=15 format=3 uid="uid://c74tddw3ql2ly"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1ufd1"]
 [ext_resource type="PackedScene" uid="uid://c4jrbfinymbdr" path="res://scenes/tile_spawn.tscn" id="2_ju1rh"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cv81c5wj1dot8" path="res://scenes/tile_tree.tscn" id="10_khlq8"]
 [ext_resource type="PackedScene" uid="uid://dk8exveae8ryp" path="res://scenes/enemy_01.tscn" id="11_3wlfp"]
 [ext_resource type="PackedScene" uid="uid://ddu7hku2agwud" path="res://scenes/tile_empty.tscn" id="11_g6fob"]
+[ext_resource type="PackedScene" uid="uid://bo6atu48yjf6e" path="res://scenes/action_button.tscn" id="13_qwaab"]
 
 [sub_resource type="Environment" id="Environment_ejq31"]
 
@@ -37,3 +38,16 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ejq31")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActionButton" parent="Control" instance=ExtResource("13_qwaab")]
+layout_mode = 1
