@@ -15,6 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://bo6atu48yjf6e" path="res://scenes/action_button.tscn" id="13_qwaab"]
 
 [sub_resource type="Environment" id="Environment_ejq31"]
+background_mode = 1
+background_color = Color(0.305882, 0.368627, 0.564706, 1)
+adjustment_enabled = true
+adjustment_contrast = 1.15
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_1ufd1")
