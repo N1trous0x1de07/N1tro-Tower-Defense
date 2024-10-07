@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=4 format=3 uid="uid://dwl4fx6761r20"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_settings.gd" id="1_sna33"]
+[ext_resource type="Resource" uid="uid://l82nmqiwe675" path="res://resources/speed_enemy_settings.res" id="2_po382"]
+[ext_resource type="Script" path="res://Scripts/wave.gd" id="3_m2jjp"]
+
+[resource]
+script = ExtResource("3_m2jjp")
+enemies = Array[ExtResource("1_sna33")]([ExtResource("2_po382"), ExtResource("2_po382"), ExtResource("2_po382"), ExtResource("2_po382"), ExtResource("2_po382"), ExtResource("2_po382")])

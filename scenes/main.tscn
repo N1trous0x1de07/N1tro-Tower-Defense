@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c74tddw3ql2ly"]
+[gd_scene load_steps=23 format=3 uid="uid://c74tddw3ql2ly"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1ufd1"]
 [ext_resource type="PackedScene" uid="uid://c4jrbfinymbdr" path="res://scenes/tile_spawn.tscn" id="2_ju1rh"]
@@ -12,7 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://cv81c5wj1dot8" path="res://scenes/tile_tree.tscn" id="10_khlq8"]
 [ext_resource type="PackedScene" uid="uid://dk8exveae8ryp" path="res://scenes/enemy_01.tscn" id="11_3wlfp"]
 [ext_resource type="PackedScene" uid="uid://ddu7hku2agwud" path="res://scenes/tile_empty.tscn" id="11_g6fob"]
+[ext_resource type="Script" path="res://Scripts/wave.gd" id="13_fvatc"]
 [ext_resource type="PackedScene" uid="uid://bo6atu48yjf6e" path="res://scenes/action_button.tscn" id="13_qwaab"]
+[ext_resource type="Resource" uid="uid://8b8j5nekaigu" path="res://resources/wave_01.tres" id="14_ifg3v"]
+[ext_resource type="Resource" uid="uid://ccj5maccnbw7e" path="res://resources/wave_02.tres" id="15_egdcu"]
+[ext_resource type="Resource" uid="uid://dwl4fx6761r20" path="res://resources/wave_03.tres" id="16_j8i2d"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="16_theu4"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="17_18ulg"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="18_gk7i7"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="19_pn525"]
 
 [sub_resource type="Environment" id="Environment_ejq31"]
 background_mode = 1
@@ -30,6 +38,7 @@ tile_crossroads = ExtResource("6_1q818")
 tile_enemy = ExtResource("7_ommc6")
 tile_empty = Array[PackedScene]([ExtResource("8_6l75h"), ExtResource("9_3aasq"), ExtResource("10_khlq8"), ExtResource("11_g6fob"), ExtResource("11_g6fob"), ExtResource("11_g6fob"), ExtResource("11_g6fob")])
 enemy = ExtResource("11_3wlfp")
+enemy_waves = Array[ExtResource("13_fvatc")]([ExtResource("14_ifg3v"), ExtResource("15_egdcu"), ExtResource("16_j8i2d")])
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 7.5, 9, 9.5)
@@ -55,3 +64,46 @@ grow_vertical = 2
 
 [node name="ActionButton" parent="Control" instance=ExtResource("13_qwaab")]
 layout_mode = 1
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("16_theu4")
+
+[node name="CompoundState" type="Node" parent="StateChart"]
+script = ExtResource("17_18ulg")
+initial_state = NodePath("Initial")
+
+[node name="Initial" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("18_gk7i7")
+
+[node name="Active" type="Node" parent="StateChart/CompoundState/Initial"]
+script = ExtResource("19_pn525")
+to = NodePath("../../Active")
+event = &"to_active"
+delay_in_seconds = "0.0"
+
+[node name="Complete" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("18_gk7i7")
+
+[node name="Active" type="Node" parent="StateChart/CompoundState/Complete"]
+script = ExtResource("19_pn525")
+to = NodePath("../../Active")
+event = &"to_active"
+delay_in_seconds = "0.0"
+
+[node name="Active" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("18_gk7i7")
+
+[node name="Complete" type="Node" parent="StateChart/CompoundState/Active"]
+script = ExtResource("19_pn525")
+to = NodePath("../../Complete")
+event = &"to_complete"
+delay_in_seconds = "0.0"
+
+[node name="StartWaveButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Start Wave"
+
+[connection signal="state_entered" from="StateChart/CompoundState/Complete" to="." method="_on_complete_state_entered"]
+[connection signal="state_entered" from="StateChart/CompoundState/Active" to="." method="_on_active_state_entered"]
+[connection signal="pressed" from="StartWaveButton" to="." method="_on_start_wave_button_pressed"]
