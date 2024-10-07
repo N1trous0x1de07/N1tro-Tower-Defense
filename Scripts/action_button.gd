@@ -19,7 +19,7 @@ var _drag_alpha:float = 0.5
 
 @onready var error_mat:BaseMaterial3D = preload("res://materials/red_transparent.material")
 
-func _process(delta):
+func _process(_delta):
 	disabled = action_cost > main.cash
 # Called when the node enters the scene tree for the first time.
 func _ready():
