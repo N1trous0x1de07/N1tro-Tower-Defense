@@ -2,6 +2,9 @@ extends Button
 
 @export var button_icon:Texture2D
 @export var button_object:PackedScene
+@onready var main = $"../.."
+
+@export var action_cost:int = 60
 
 var cam:Camera3D
 var action_object:Node
@@ -16,6 +19,8 @@ var _drag_alpha:float = 0.5
 
 @onready var error_mat:BaseMaterial3D = preload("res://materials/red_transparent.material")
 
+func _process(delta):
+	disabled = action_cost > main.cash
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	icon = button_icon
@@ -106,4 +111,5 @@ func _on_button_up():
 		var new_object:Node3D = button_object.instantiate()
 		get_viewport().add_child(new_object)
 		new_object.global_position = _last_valid_location
+		main.cash -= action_cost
 #		set_child_mesh_alphas(action_object, 1)

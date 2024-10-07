@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c74tddw3ql2ly"]
+[gd_scene load_steps=24 format=3 uid="uid://c74tddw3ql2ly"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1ufd1"]
 [ext_resource type="PackedScene" uid="uid://c4jrbfinymbdr" path="res://scenes/tile_spawn.tscn" id="2_ju1rh"]
@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://dwl4fx6761r20" path="res://resources/wave_03.tres" id="16_j8i2d"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="16_theu4"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="17_18ulg"]
+[ext_resource type="Resource" uid="uid://bxperh7wc8r4v" path="res://resources/wave_04.tres" id="17_f16x5"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="18_gk7i7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="19_pn525"]
 
@@ -38,7 +39,7 @@ tile_crossroads = ExtResource("6_1q818")
 tile_enemy = ExtResource("7_ommc6")
 tile_empty = Array[PackedScene]([ExtResource("8_6l75h"), ExtResource("9_3aasq"), ExtResource("10_khlq8"), ExtResource("11_g6fob"), ExtResource("11_g6fob"), ExtResource("11_g6fob"), ExtResource("11_g6fob")])
 enemy = ExtResource("11_3wlfp")
-enemy_waves = Array[ExtResource("13_fvatc")]([ExtResource("14_ifg3v"), ExtResource("15_egdcu"), ExtResource("16_j8i2d")])
+enemy_waves = Array[ExtResource("13_fvatc")]([ExtResource("14_ifg3v"), ExtResource("15_egdcu"), ExtResource("16_j8i2d"), ExtResource("17_f16x5")])
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 7.5, 9, 9.5)
@@ -64,6 +65,16 @@ grow_vertical = 2
 
 [node name="ActionButton" parent="Control" instance=ExtResource("13_qwaab")]
 layout_mode = 1
+
+[node name="CashLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Cash $0"
+horizontal_alignment = 1
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("16_theu4")
