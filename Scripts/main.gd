@@ -19,7 +19,7 @@ func _ready():
 	_spawn_wave()
 
 func _spawn_wave():
-	for i in range(2):
+	for i in range(10):
 		await get_tree().create_timer(2.275).timeout
 	#	print("Instantiating enemy")
 		var enemy2:Node3D = enemy.instantiate()
