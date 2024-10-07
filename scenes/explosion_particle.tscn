@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://bk1w07lx16jyt"]
+
+[ext_resource type="Texture2D" uid="uid://cfxb33qah318n" path="res://images/Explosion.png" id="1_hi82m"]
+
+[sub_resource type="Curve" id="Curve_0jov3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.804348, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ih7ff"]
+curve = SubResource("Curve_0jov3")
+
+[sub_resource type="Curve" id="Curve_c5e8l"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.347826, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_umr8p"]
+curve = SubResource("Curve_c5e8l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3e0jj"]
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_umr8p")
+alpha_curve = SubResource("CurveTexture_ih7ff")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40quo"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_hi82m")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_u6lx2"]
+material = SubResource("StandardMaterial3D_40quo")
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+interpolate = false
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_3e0jj")
+draw_pass_1 = SubResource("QuadMesh_u6lx2")

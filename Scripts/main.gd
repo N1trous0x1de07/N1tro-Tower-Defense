@@ -13,19 +13,19 @@ extends Node3D
 @onready var cam = $Camera3D
 var RAYCAST_LENGTH:float = 100
 
-## assumes the path generator has finished, and adds the remaining tiles to fill in the grid
+## Assumes the path generator has finished, and adds the remaining tiles to fill in the grid.
 func _ready():
 	_complete_grid()
 	_spawn_wave()
-
-func _spawn_wave():
-	for i in range(10):
+	
+func _spawn_wave():	
+	for i in range(20):
 		await get_tree().create_timer(2.275).timeout
-	#	print("Instantiating enemy")
+		#print("Instantiating enemy")
 		var enemy2:Node3D = enemy.instantiate()
 		add_child(enemy2)
 		enemy2.add_to_group("enemies")
-
+	
 func _complete_grid():
 	for x in range(PathGenInstance.path_config.map_length):
 		for y in range(PathGenInstance.path_config.map_height):
@@ -34,14 +34,13 @@ func _complete_grid():
 				add_child(tile)
 				tile.global_position = Vector3(x, 0, y)
 				tile.global_rotation_degrees = Vector3(0, randi_range(0,3)*90, 0)
-
-
+	
 	for i in range(PathGenInstance.get_path_route().size()):
 		var tile_score:int = PathGenInstance.get_tile_score(i)
-
+		
 		var tile:Node3D = tile_empty[0].instantiate()
 		var tile_rotation: Vector3 = Vector3.ZERO
-
+		
 		if tile_score == 2:
 			tile = tile_end.instantiate()
 			tile_rotation = Vector3(0,-90,0)
@@ -69,7 +68,7 @@ func _complete_grid():
 		elif tile_score == 15:
 			tile = tile_crossroads.instantiate()
 			tile_rotation = Vector3(0,0,0)
-
+			
 		add_child(tile)
 		tile.global_position = Vector3(PathGenInstance.get_path_tile(i).x, 0, PathGenInstance.get_path_tile(i).y)
 		tile.global_rotation_degrees = tile_rotation
