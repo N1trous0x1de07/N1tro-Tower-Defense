@@ -22,4 +22,7 @@ In this game there are health bars, interactable UI buttons, there's a lighting 
 
 #7 The wave system:
 Waves do not automatically start in this game. There is a button in the top left of the screen that you have to click in order to start each wave. This gives players a moment to think and strategize before anything even happens. In my opinion this is a must have for tower defense games and it makes things quite a bit more fun. There are already 4 waves in the game, but more can be added in a couple button presses.
+
+Overall Reflection:
+I think what I've made here is honestly a pretty interesting little game, but at the same time I think I should've went for something a little bit less complex. There is no game over, there is no title screen, and there is only one "tower". The problem here is that what I've built so far is so complex that I can't even begin to imagine what I'd need to do to add a health system, a game over, a title screen. I tried my best to make the game feel polished and well put together so I hope I can get those bonus points, but I'm sure with the majority of the polish features missing I won't quite get there. If I get the polish bonus points I should be at a low B in terms of grading, but without it I'd be at a low D. Either way we live and we learn.
  
