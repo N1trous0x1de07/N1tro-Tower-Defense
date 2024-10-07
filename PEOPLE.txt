@@ -1,0 +1,5 @@
+The tutorial for the overall game is on youtube at https://www.youtube.com/@widearchshark3981
+
+The github repo for the tutorial code + some assets is https://github.com/WideArchShark/godot-tower-defense
+
+Tower Defense Kit used for assets here https://kenney-assets.itch.io/tower-defense-kit
